@@ -1,0 +1,31 @@
+const mongoose = require("mongoose");
+
+const attendanceSchema = new mongoose.Schema({
+  studentId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Student",
+    required: true,
+  },
+  hostel:{
+    type: String
+  },
+  floor:{
+    type: String
+  },
+  room:{
+    type: String
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ["Present", "Absent", "Leave"],
+    default: "Present",
+  },
+});
+
+attendanceSchema.index({ studentId: 1, date: 1 }, { unique: true });
+
+module.exports = mongoose.model("Attendance", attendanceSchema);
