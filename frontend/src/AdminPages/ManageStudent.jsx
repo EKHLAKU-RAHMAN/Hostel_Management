@@ -11,15 +11,15 @@ const ManageStudents = () => {
   const [searchHostel, setSearchHostel] = useState("");
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   fetch(`${import.meta.env.VITE_API_URL}/api/admin/students`)
-  //     .then((res) => {
-  //       if (!res.ok) throw new Error("Failed to fetch students");
-  //       return res.json();
-  //     })
-  //     .then((data) => setStudents(data))
-  //     .catch((err) => console.error(err));
-  // }, []);
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/api/admin/students`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch students");
+        return res.json();
+      })
+      .then((data) => setStudents(data))
+      .catch((err) => console.error(err));
+  }, []);
 
   // Filtered students based on name and year
   const filteredStudents = students.filter((s) => {
@@ -76,9 +76,9 @@ const fetchStudents = async () => {
   }
 };
 
-// useEffect(() => {
-//   fetchStudents();
-// }, []);
+useEffect(() => {
+  fetchStudents();
+}, []);
 
 const handleImportExcel = async (e) => {
   const file = e.target.files[0];
