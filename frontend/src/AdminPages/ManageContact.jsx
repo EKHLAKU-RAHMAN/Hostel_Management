@@ -23,7 +23,8 @@ import {
 } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import AdminLayout from "../AdminComponent/AdminLayout";
-import axios from "axios";
+// import axios from "axios";
+import api from "../Api/axios";
 
 export default function AdminMessages() {
   const [messages, setMessages] = useState([]);
@@ -34,7 +35,7 @@ export default function AdminMessages() {
   const fetchMessages = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/contact`);
+      const res = await api.get(`/api/contact`);
       if (res.data.success) setMessages(res.data.data);
     } catch (error) {
       console.error("Error fetching messages:", error);
@@ -54,7 +55,7 @@ export default function AdminMessages() {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`${process.env.REACT_APP_API_URL}/api/contact/${deleteId}`);
+      await api.delete(`/api/contact/${deleteId}`);
       setMessages(messages.filter((msg) => msg._id !== deleteId));
       setConfirmOpen(false);
       setDeleteId(null);

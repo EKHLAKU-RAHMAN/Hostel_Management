@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Card, Button, Form, Row, Col, Spinner } from "react-bootstrap";
 import AdminLayout from "../AdminComponent/AdminLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AdminGallery() {
   const [images, setImages] = useState([]);
@@ -13,7 +14,7 @@ export default function AdminGallery() {
 
   const fetchImages = async () => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/gallery`);
+      const res = await fetch(`${API_URL}/api/gallery`);
       const data = await res.json();
       setImages(data);
     } catch (err) {
@@ -32,7 +33,7 @@ export default function AdminGallery() {
 
     setLoading(true);
     try {
-      await fetch(`${process.env.REACT_APP_API_URL}/api/gallery/upload`, {
+      await fetch(`${API_URL}/api/gallery/upload`, {
         method: "POST",
         body: formData,
       });
@@ -48,7 +49,7 @@ export default function AdminGallery() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this image?")) return;
     try {
-      await fetch(`${process.env.REACT_APP_API_URL}/api/gallery/${id}`, { method: "DELETE" });
+      await fetch(`${API_URL}/api/gallery/${id}`, { method: "DELETE" });
       fetchImages();
     } catch (err) {
       console.error(err);

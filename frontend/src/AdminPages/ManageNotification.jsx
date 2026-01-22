@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Card, Form, Button, Table, Spinner } from "react-bootstrap";
 import AdminLayout from "../AdminComponent/AdminLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AdminMessPDF() {
   const [title, setTitle] = useState("");
@@ -16,7 +17,7 @@ export default function AdminMessPDF() {
 
   const fetchPDFs = async () => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/mess`);
+      const res = await fetch(`${API_URL}/api/mess`);
       const data = await res.json();
       setPDFs(data);
     } catch (err) {
@@ -34,7 +35,7 @@ export default function AdminMessPDF() {
 
     setLoading(true);
     try {
-      await fetch(`${process.env.REACT_APP_API_URL}/api/mess/upload`, {
+      await fetch(`${API_URL}/api/mess/upload`, {
         method: "POST",
         body: formData,
       });
@@ -53,7 +54,7 @@ export default function AdminMessPDF() {
 
     setDeletingId(id);
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/mess/${id}`, {
+      const res = await fetch(`${API_URL}/api/mess/${id}`, {
         method: "DELETE",
       });
 

@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap";
 import { CSVLink } from "react-csv";
 import AdminLayout from "../AdminComponent/AdminLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AttendanceReport() {
   const [attendance, setAttendance] = useState([]);
@@ -43,7 +44,7 @@ export default function AttendanceReport() {
       const params = new URLSearchParams(filters).toString();
 
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/admin/attendance/report?${params}`,
+        `${API_URL}/api/admin/attendance/report?${params}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
