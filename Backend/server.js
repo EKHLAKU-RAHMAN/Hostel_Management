@@ -83,7 +83,7 @@ async function main() {
 }
 
 
-api
+//Api
 app.get("/", (req, res)=>{
   res.send("testing");
 });
@@ -91,11 +91,11 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.use("/api",studentRouter);
 app.use("/", studentRouter);
 app.use("/", roomRouter);
-app.use("/", roomRouter);
+// app.use("/", roomRouter);
 app.use("/api", roomRouter); 
-app.use("/api",wardenRouter);
+// app.use("/api",wardenRouter);
 app.use("/api", StudenForWarden);
-app.use("/api", Attendance);
+// app.use("/api", Attendance);
 // app.use("/api/warden", wardenRouter);
 app.use("/api", Attendance);
 app.use("/api", wardenRouter);
@@ -124,7 +124,7 @@ app.use("/all", verifyAdmin, async (req, res) => {
 });
 
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, ()=>{
   console.log(`server is listening on ${PORT}`);
 });
