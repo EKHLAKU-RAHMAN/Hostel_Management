@@ -12,21 +12,48 @@ const ManageStudents = () => {
   const [searchYear, setSearchYear] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-      fetch(`${API_URL}/api/warden/students`, {
-      method: "GET",
-      headers: {
+//   useEffect(() => {
+//       fetch(`${API_URL}/api/warden/students`, {
+//       method: "GET",
+//       headers: {
+//       "Content-Type": "application/json",
+//       "Authorization": `Bearer ${localStorage.getItem("wardenToken")}`,
+//   },
+// })
+//       .then((res) => {
+//         if (!res.ok) throw new Error("Failed to fetch students");
+//         return res.json();
+//       })
+//       .then((data) => setStudents(data.students || []))
+//       .catch((err) => console.error(err));
+//   }, []);
+
+useEffect(() => {
+  const token = localStorage.getItem("wardenToken");
+
+  if (!token) {
+    console.error("No token found");
+    return;
+  }
+
+  fetch(`${API_URL}/api/warden/students`, {
+    method: "GET",
+    headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${localStorage.getItem("wardenToken")}`,
-  },
-})
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch students");
-        return res.json();
-      })
-      .then((data) => setStudents(data))
-      .catch((err) => console.error(err));
-  }, []);
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error("Unauthorized or failed to fetch students");
+      return res.json();
+    })
+    .then((data) => {
+      console.log("API RESPONSE:", data); // 🔥 debug
+      setStudents(Array.isArray(data) ? data : data.students || []);
+    })
+    .catch((err) => console.error("FETCH ERROR:", err));
+}, []);
+
 
   const filteredStudents = students.filter((s) => {
     const matchesName =
