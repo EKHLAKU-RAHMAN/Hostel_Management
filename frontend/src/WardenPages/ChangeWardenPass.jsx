@@ -10,9 +10,10 @@ import {
   Box,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import axios from "axios";
+// import axios from "axios";
 import WardenLayout from "../WardenComponent/WardenLayout";
 import { useNavigate } from "react-router-dom";
+import api from "../Api/axios";
 
 export default function WardenChangePassword() {
   const [oldPassword, setOldPassword] = useState("");
@@ -33,8 +34,8 @@ export default function WardenChangePassword() {
     try {
       setLoading(true);
       const token = localStorage.getItem("wardenToken");
-      const res = await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/warden/change-password`,
+      const res = await api.put(
+        `/api/warden/change-password`,
         { oldPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } },
       );

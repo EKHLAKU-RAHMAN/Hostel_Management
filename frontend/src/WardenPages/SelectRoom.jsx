@@ -1,8 +1,9 @@
 
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import WardenLayout from "../WardenComponent/WardenLayout";
+import api from "../Api/axios";
 
 const Rooms = () => {
   const location = useLocation();
@@ -46,8 +47,7 @@ const Rooms = () => {
   /* ================= FETCH ROOMS ================= */
     const fetchRooms = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/select/rooms`,
+        const res = await api.get(`/api/select/rooms`,
           {
             params: { hostel, floor, date },
             headers: {
@@ -74,8 +74,8 @@ const Rooms = () => {
     setModalLoading(true);
 
     try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/warden/students-by-room`,
+      const res = await api.get(
+        `/api/warden/students-by-room`,
         {
           params: {
             hostel,
@@ -98,8 +98,8 @@ const Rooms = () => {
 
   const updateStatus = async (studentId, status) => {
   try {
-    await axios.post(
-      `${process.env.REACT_APP_API_URL}/api/attendance/mark`,
+    await api.post(
+      `/api/attendance/mark`,
       {
         studentId,
         date,
@@ -151,8 +151,8 @@ const Rooms = () => {
   setEditLoading(true);
 
   try {
-    const res = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/warden/students-by-room`,
+    const res = await api.get(
+      `/api/warden/students-by-room`,
       {
         params: {
           hostel,
@@ -175,8 +175,8 @@ const Rooms = () => {
 
 const updateEditStatus = async (studentId, status) => {
   try {
-    await axios.post(
-      `${process.env.REACT_APP_API_URL}/api/attendance/mark`,
+    await api.post(
+      `/api/attendance/mark`,
       {
         studentId,
         date,

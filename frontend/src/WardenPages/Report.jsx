@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Table, Form, Button, Spinner } from "react-bootstrap";
 import { CSVLink } from "react-csv";
 import WardenLayout from "../WardenComponent/WardenLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AttendanceReport() {
   const [attendance, setAttendance] = useState([]);
@@ -17,7 +18,7 @@ export default function AttendanceReport() {
     setLoading(true);
     const token = localStorage.getItem("wardenToken");
     const params = new URLSearchParams(filters).toString();
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/warden/attendance/report?${params}`, {
+    const res = await fetch(`${API_URL}/api/warden/attendance/report?${params}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();

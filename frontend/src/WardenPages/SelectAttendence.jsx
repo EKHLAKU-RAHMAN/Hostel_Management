@@ -1,8 +1,9 @@
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import WardenLayout from "../WardenComponent/WardenLayout";
+import api from "../Api/axios";
 
 const SelectAttendanceCriteria = () => {
   const navigate = useNavigate();
@@ -24,8 +25,8 @@ const SelectAttendanceCriteria = () => {
     const fetchHostels = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/attendance-selection/hostels`,
+        const res = await api.get(
+          `/api/attendance-selection/hostels`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("wardenToken")}`
@@ -53,8 +54,8 @@ const SelectAttendanceCriteria = () => {
 
     const fetchFloors = async () => {
       try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/attendance-selection/floors/${formData.hostel}`,
+        const res = await api.get(
+          `/api/attendance-selection/floors/${formData.hostel}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("wardenToken")}`

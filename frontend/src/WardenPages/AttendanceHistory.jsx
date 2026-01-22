@@ -11,6 +11,7 @@ import {
   Badge,
 } from "react-bootstrap";
 import WardenLayout from "../WardenComponent/WardenLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AttendanceHistory() {
   const [attendance, setAttendance] = useState([]);
@@ -24,7 +25,7 @@ export default function AttendanceHistory() {
     setLoading(true);
     const token = localStorage.getItem("wardenToken");
     fetch(
-      `${process.env.REACT_APP_API_URL}/api/warden/attendance/history?date=${date}`,
+      `${API_URL}/api/warden/attendance/history?date=${date}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }

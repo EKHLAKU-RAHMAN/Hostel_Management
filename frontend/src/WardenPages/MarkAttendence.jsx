@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap";
 import WardenLayout from "../WardenComponent/WardenLayout";
 import { data } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function AttendancePage() {
   const [students, setStudents] = useState([]);
@@ -28,7 +29,7 @@ export default function AttendancePage() {
       }
   
       // ✅ ONLY fetch students
-      fetch(`${process.env.REACT_APP_API_URL}/api/warden/select/students`, {
+      fetch(`${API_URL}/api/warden/select/students`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
