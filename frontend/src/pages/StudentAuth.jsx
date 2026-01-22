@@ -12,8 +12,9 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../Api/axios";
 
 export default function StudentLogin() {
   const [formData, setFormData] = useState({ studentId: "", password: "" });
@@ -42,7 +43,7 @@ export default function StudentLogin() {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/student/login", formData);
+      const res = await api.post("/api/student/login", formData);
 
       // ✅ Save token/data in localStorage (persistent) or sessionStorage (temporary)
       if (remember) {

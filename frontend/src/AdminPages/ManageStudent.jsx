@@ -12,7 +12,7 @@ const ManageStudents = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/admin/students`)
+    fetch(`${import.meta.env.VITE_API_URL}/admin/students`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch students");
         return res.json();
@@ -67,7 +67,7 @@ const ManageStudents = () => {
 
 const fetchStudents = async () => {
   try {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/admin/students`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/students`);
     const data = await res.json();
     setStudents(data);
   } catch (err) {
@@ -88,7 +88,7 @@ const handleImportExcel = async (e) => {
   formData.append("file", file);
 
   try {
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/students/import`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/students/import`, {
       method: "POST",
       body: formData,
     });
