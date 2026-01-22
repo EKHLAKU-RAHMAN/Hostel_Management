@@ -53,7 +53,8 @@ const markAttendance = require("./routes/markAttendance");
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://hostel-management-nu.vercel.app"
+  "https://hostel-management-nu.vercel.app",
+  "https://hostel-management-git-main-ekhlaku-rahmans-projects.vercel.app"
 ];
 
 app.use(cors({
@@ -90,10 +91,10 @@ async function main() {
 }
 
 
-// api
-// app.get("/", (req, res)=>{
-//   res.send("testing");
-// });
+api
+app.get("/", (req, res)=>{
+  res.send("testing");
+});
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.use("/api",studentRouter);
 app.use("/", studentRouter);
@@ -129,10 +130,6 @@ app.use("/all", verifyAdmin, async (req, res) => {
   const data = await SomeModel.find();
   res.json(data);
 });
-
-
-// const cors = require("cors");
-app.use(cors({ origin: "*" }));
 
 
 const PORT = 5000;
