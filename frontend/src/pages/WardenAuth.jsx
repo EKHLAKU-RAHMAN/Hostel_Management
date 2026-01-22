@@ -49,10 +49,7 @@ export default function WardenLogin() {
     setLoading(true);
 
     try {
-      const res = await api.post(
-        `/api/warden/login`,
-        formData
-      );
+      const res = await api.post(`/api/warden/login`, formData);
 
       localStorage.setItem("wardenToken", res.data.token || "demo-token");
       localStorage.setItem("wardenData", JSON.stringify(res.data.warden));
