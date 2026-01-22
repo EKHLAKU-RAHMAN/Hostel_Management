@@ -86,7 +86,7 @@ export default function AdminGallery() {
                 <Card className="shadow-sm">
                   <Card.Img
                     variant="top"
-                    src={`${process.env.REACT_APP_API_URL}/uploads/gallery/${img.filename}`}
+                    src={`${API_URL}/uploads/gallery/${img.filename}`}
                     style={{ height: "200px", objectFit: "cover" }}
                   />
                   <Card.Body className="text-center">
