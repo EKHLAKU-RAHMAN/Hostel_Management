@@ -51,6 +51,29 @@ const markAttendance = require("./routes/markAttendance");
 //   allowedHeaders: ["Content-Type", "Authorization"]
 // }));
 
+// const allowedOrigins = [
+//   "http://localhost:5173",
+//   "https://hostel-management-nu.vercel.app",
+//   "https://hostel-management-git-main-ekhlaku-rahmans-projects.vercel.app"
+// ];
+
+// app.use(cors({
+//   origin: function(origin, callback){
+//     // allow requests with no origin (like Postman)
+//     if(!origin) return callback(null, true);
+//     if(allowedOrigins.indexOf(origin) === -1){
+//       const msg = `The CORS policy for this site does not allow access from the specified Origin.`;
+//       return callback(new Error(msg), false);
+//     }
+//     return callback(null, true);
+//   },
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type", "Authorization"]
+// }));
+
+const cors = require("cors");
+
 const allowedOrigins = [
   "http://localhost:5173",
   "https://hostel-management-nu.vercel.app",
@@ -58,19 +81,24 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function(origin, callback){
-    // allow requests with no origin (like Postman)
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
-      const msg = `The CORS policy for this site does not allow access from the specified Origin.`;
-      return callback(new Error(msg), false);
+  origin: function (origin, callback) {
+    // Postman / server-to-server requests
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
     }
-    return callback(null, true);
   },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+// 🔥 VERY IMPORTANT (preflight fix)
+app.options("*", cors());
+
 
 
 app.use(express.json());
