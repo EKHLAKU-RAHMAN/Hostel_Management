@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, Button, Row, Col, ListGroup, Image, Spinner } from "react-bootstrap";
 import AdminLayout from "../AdminComponent/AdminLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const StudentDetail = () => {
   const { id } = useParams(); // Dynamic student id from URL
@@ -14,7 +15,7 @@ const StudentDetail = () => {
 
   // Fetch student data from backend
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/students/${id}`)
+    fetch(`${API_URL}/students/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch student");
         return res.json();     
@@ -34,7 +35,7 @@ const StudentDetail = () => {
   // Delete student handler
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this student?")) {
-      fetch(`${process.env.REACT_APP_API_URL}/students/${id}`, {
+      fetch(`${API_URL}/students/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

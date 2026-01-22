@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Card, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const StudentForm = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const StudentForm = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/rooms`);
+        const res = await fetch(`${API_URL}/api/rooms`);
         const data = await res.json();
 
         // Ensure occupied field exists
@@ -164,7 +165,7 @@ const availableRooms = rooms.filter((room) => {
     }
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/newStudent`, {
+      const res = await fetch(`${API_URL}/api/newStudent`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`, // ✅ Token added

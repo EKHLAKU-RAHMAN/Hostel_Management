@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Card, Row, Col, Image } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const EditStudentForm = () => {
   const { id } = useParams(); // URL se student ka id milega
@@ -34,7 +35,7 @@ const EditStudentForm = () => {
     useEffect(() => {
       const fetchRooms = async () => {
         try {
-          const res = await fetch(`${process.env.REACT_APP_API_URL}/api/rooms`);
+          const res = await fetch(`${API_URL}/api/rooms`);
           const data = await res.json();
   
           // Ensure occupied field exists
@@ -55,7 +56,7 @@ const EditStudentForm = () => {
   useEffect(() => {
     const fetchStudent = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/students/${id}`);
+        const res = await fetch(`${API_URL}/api/students/${id}`);
         const data = await res.json();
 
         setFormData({
@@ -76,7 +77,7 @@ const EditStudentForm = () => {
         });
 
         if (data.photo) {
-          setPreview(`http://localhost:5000${data.photo}`); // uploads se photo load
+          setPreview(`${API_URL}${data.photo}`); // uploads se photo load
         }
       } catch (err) {
         console.error("Error fetching student:", err);
@@ -167,7 +168,7 @@ const handleSubmit = async (e) => {
     });
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/students/${id}`, {
+      const res = await fetch(`${API_URL}/api/students/${id}`, {
         method: "PUT",
         body: fd,
       });
