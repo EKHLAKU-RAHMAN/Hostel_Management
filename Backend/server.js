@@ -44,6 +44,7 @@ const allowedOrigins = [
   "https://hostel-management-git-main-ekhlaku-rahmans-projects.vercel.app"
 ];
 
+app.use(cors());
 app.use(cors({
   origin: (origin, callback) => {
     // Allow server-to-server & Render health checks
@@ -61,8 +62,6 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-// Preflight fix
-app.options("*", cors());
 
 
 app.use(express.json());
