@@ -72,6 +72,34 @@ const markAttendance = require("./routes/markAttendance");
 //   allowedHeaders: ["Content-Type", "Authorization"]
 // }));
 
+// const cors = require("cors");
+
+// const allowedOrigins = [
+//   "http://localhost:5173",
+//   "https://hostel-management-nu.vercel.app",
+//   "https://hostel-management-git-main-ekhlaku-rahmans-projects.vercel.app"
+// ];
+
+// app.use(cors({
+//   origin: function (origin, callback) {
+//     // Postman / server-to-server requests
+//     if (!origin) return callback(null, true);
+
+//     if (allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization"]
+// }));
+
+// // 🔥 VERY IMPORTANT (preflight fix)
+// app.options("*", cors());
+
+
 const cors = require("cors");
 
 const allowedOrigins = [
@@ -81,24 +109,24 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Postman / server-to-server requests
+  origin: (origin, callback) => {
+    // Allow server-to-server & Render health checks
     if (!origin) return callback(null, true);
 
     if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
+      return callback(null, true);
     }
+
+    // ❌ ERROR THROW MAT KARO
+    return callback(null, false);
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-// 🔥 VERY IMPORTANT (preflight fix)
+// Preflight fix
 app.options("*", cors());
-
 
 
 app.use(express.json());
