@@ -56,7 +56,7 @@ function App() {
 <Router>
       <Routes>
         {/* Home Route */}
-        <ToastContainer position="top-right" autoClose={3000} />
+        {/* <ToastContainer position="top-right" autoClose={3000} /> */}
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
