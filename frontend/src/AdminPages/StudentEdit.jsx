@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { Form, Button, Card, Row, Col, Image } from "react-bootstrap";
+import { Form, Button, Card, Row, Col, Image, Toast } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -176,7 +176,7 @@ const handleSubmit = async (e) => {
       const result = await res.json();
 
       if (res.ok) {
-        alert("✅ Student Updated Successfully!");
+        Toast.success("✅ Student Updated Successfully!");
         navigate(`/admin/students`);
       } else {
         // 👇 Backend se aaya hua error message flash karo
