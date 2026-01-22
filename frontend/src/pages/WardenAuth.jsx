@@ -14,8 +14,9 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../Api/axios";
 
 export default function WardenLogin() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -48,8 +49,8 @@ export default function WardenLogin() {
     setLoading(true);
 
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/warden/login",
+      const res = await api.post(
+        "/api/warden/login",
         formData
       );
 
