@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Card, Row, Col, Spinner, Modal, Button } from "react-bootstrap";
 import MainLayout from "./MainLayout";
-const API_URL = import.meta.env.VITE_API_RUL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 
 export default function StudentGallery() {
@@ -18,7 +18,7 @@ export default function StudentGallery() {
 
   const fetchImages = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_RUL}/api/gallery`);
+      const res = await fetch(`${API_URL}/api/gallery`);
       const data = await res.json();
       setImages(data);
     } catch (err) {
