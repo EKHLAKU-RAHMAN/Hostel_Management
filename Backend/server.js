@@ -41,7 +41,7 @@ const markAttendance = require("./routes/markAttendance");
 
 app.use(cors());
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://hostel-management-nu.vercel.app/",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
@@ -66,9 +66,9 @@ async function main() {
 
 
 // api
-app.get("/", (req, res)=>{
-  res.send("testing");
-});
+// app.get("/", (req, res)=>{
+//   res.send("testing");
+// });
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.use("/api",studentRouter);
 app.use("/", studentRouter);
@@ -105,11 +105,10 @@ app.use("/all", verifyAdmin, async (req, res) => {
   res.json(data);
 });
 
-// app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-// })
+// const cors = require("cors");
+app.use(cors({ origin: "*" }));
+
 
 const PORT = 5000;
 app.listen(PORT, ()=>{
