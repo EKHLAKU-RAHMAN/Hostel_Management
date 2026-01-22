@@ -8,6 +8,7 @@ import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import "./AdminDashboard.css";
+import api from "../Api/axios";
 
 const AdminDashboardHome = () => {
   const [stats, setStats] = useState({
@@ -21,7 +22,7 @@ const AdminDashboardHome = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/dashboard-stats`);
+        const res = await api.get(`/api/admin/dashboard-stats`);
         if (res.data.success) {
           setStats(res.data.data);
         }
