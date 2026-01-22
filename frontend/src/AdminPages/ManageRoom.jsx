@@ -11,6 +11,7 @@ import {
   ListGroup,
 } from "react-bootstrap";
 import AdminLayout from "../AdminComponent/AdminLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 
 const RoomManagement = () => {
@@ -57,7 +58,7 @@ const RoomManagement = () => {
 
   const fetchRooms = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/rooms`);
+      const res = await fetch(`${API_URL}/api/rooms`);
       const data = await res.json();
       setRooms(data);
     } catch (err) {
@@ -70,7 +71,7 @@ const RoomManagement = () => {
     setShowViewModal(true);
     try {
       const res = await fetch(
-        `$${import.meta.env.VITE_API_URL}/api/rooms/${room.roomNo}/students`
+        `${API_URL}/api/rooms/${room.roomNo}/students`
       );
       const data = await res.json();
       setStudents(data);
@@ -83,7 +84,7 @@ const RoomManagement = () => {
     e.preventDefault();
     setAdding(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/addRoom`, {
+      const res = await fetch(`${API_URL}/api/addRoom`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newRoom),
@@ -105,7 +106,7 @@ const RoomManagement = () => {
 
   const handleDeleteRoom = async (id) => {
     if (!window.confirm("Delete this room?")) return;
-    await fetch(`${import.meta.env.VITE_API_URL}/api/rooms/${id}`, {
+    await fetch(`${API_URL}/api/rooms/${id}`, {
       method: "DELETE",
     });
     fetchRooms();
@@ -121,7 +122,7 @@ const RoomManagement = () => {
     setUpdating(true);
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/rooms/${editRoom._id}`,
+        `${API_URL}/api/rooms/${editRoom._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

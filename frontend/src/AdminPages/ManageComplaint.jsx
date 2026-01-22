@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Table, Button, Form, Row, Col, Modal, Badge, Spinner } from "react-bootstrap";
 import AdminLayout from "../AdminComponent/AdminLayout";
-import axios from "axios";
+// import axios from "axios";
+import api from "../Api/axios";
 
 const ComplaintsManagement = () => {
   const [search, setSearch] = useState("");
@@ -24,7 +25,7 @@ const ComplaintsManagement = () => {
       return;
     }
 
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/admin/complaints`, {
+    const res = await api.get(`/api/admin/complaints`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setComplaints(res.data.complaints);
@@ -63,8 +64,8 @@ const ComplaintsManagement = () => {
   const updateStatus = async (id, newStatus) => {
     setUpdating(id);
     try {
-      await axios.patch(
-        `${process.env.REACT_APP_API_URL}/api/admin/complaint/${id}`,
+      await api.patch(
+        `/api/admin/complaint/${id}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
