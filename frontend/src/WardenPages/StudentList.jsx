@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Button, Form, Row, Col, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import WardenLayout from "../WardenComponent/WardenLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 
 const ManageStudents = () => {
@@ -12,7 +13,7 @@ const ManageStudents = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      fetch(`${process.env.REACT_APP_API_URL}/api/warden/students`, {
+      fetch(`${API_URL}/api/warden/students`, {
       method: "GET",
       headers: {
       "Content-Type": "application/json",

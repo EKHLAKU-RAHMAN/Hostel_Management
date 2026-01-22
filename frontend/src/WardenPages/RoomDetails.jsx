@@ -11,6 +11,7 @@ import {
   ListGroup,
 } from "react-bootstrap";
 import WardenLayout from "../WardenComponent/WardenLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const RoomManagement = () => {
   const [rooms, setRooms] = useState([]);
@@ -34,7 +35,7 @@ const RoomManagement = () => {
 
   const fetchRooms = async () => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/rooms`);
+      const res = await fetch(`${API_URL}/api/rooms`);
       const data = await res.json();
       setRooms(data);
     } catch (err) {
@@ -46,7 +47,7 @@ const RoomManagement = () => {
     setSelectedRoom(room);
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/rooms/${room.roomNo}/students`
+        `${API_URL}/api/rooms/${room.roomNo}/students`
       );
       const data = await res.json();
       setStudents(data);

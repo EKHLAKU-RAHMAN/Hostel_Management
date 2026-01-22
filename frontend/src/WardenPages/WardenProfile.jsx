@@ -19,6 +19,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import HomeIcon from "@mui/icons-material/Home";
 import SchoolIcon from "@mui/icons-material/School";
 import { useNavigate } from "react-router-dom"; // ✅ for navigation
+const API_URL = import.meta.env.VITE_API_URL;
 
 // 🎨 Styled Components
 const ProfileCard = styled(Card)(() => ({
@@ -87,7 +88,7 @@ export default function WardenProfile() {
     setLoading(true);
     const token = localStorage.getItem("wardenToken");
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/wardenProfile`, {
+      const res = await fetch(`${API_URL}/api/wardenProfile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -113,7 +114,7 @@ export default function WardenProfile() {
   const handleSave = async () => {
     try {
       const token = localStorage.getItem("wardenToken");
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/warden/profile`, {
+      const res = await fetch(`${API_URL}/api/warden/profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
