@@ -12,7 +12,7 @@ const ManageStudents = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      fetch("http://localhost:5000/api/warden/students", {
+      fetch(`${process.env.REACT_APP_API_URL}/api/warden/students`, {
       method: "GET",
       headers: {
       "Content-Type": "application/json",

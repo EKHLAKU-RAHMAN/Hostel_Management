@@ -19,7 +19,7 @@ const StudentProfile = () => {
         const token = localStorage.getItem("studentToken");
         if (!token) throw new Error("Token missing. Please login.");
 
-        const res = await axios.get("http://localhost:5000/api/studentProfile", {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/studentProfile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

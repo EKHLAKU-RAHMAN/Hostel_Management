@@ -16,7 +16,7 @@ export default function AdminMessPDF() {
 
   const fetchPDFs = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/mess");
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/mess`);
       const data = await res.json();
       setPDFs(data);
     } catch (err) {
@@ -34,7 +34,7 @@ export default function AdminMessPDF() {
 
     setLoading(true);
     try {
-      await fetch("http://localhost:5000/api/mess/upload", {
+      await fetch(`${process.env.REACT_APP_API_URL}/api/mess/upload`, {
         method: "POST",
         body: formData,
       });
@@ -53,7 +53,7 @@ export default function AdminMessPDF() {
 
     setDeletingId(id);
     try {
-      const res = await fetch(`http://localhost:5000/api/mess/${id}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/mess/${id}`, {
         method: "DELETE",
       });
 

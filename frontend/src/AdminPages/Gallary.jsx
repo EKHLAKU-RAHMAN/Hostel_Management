@@ -13,7 +13,7 @@ export default function AdminGallery() {
 
   const fetchImages = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/gallery");
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/gallery`);
       const data = await res.json();
       setImages(data);
     } catch (err) {
@@ -32,7 +32,7 @@ export default function AdminGallery() {
 
     setLoading(true);
     try {
-      await fetch("http://localhost:5000/api/gallery/upload", {
+      await fetch(`${process.env.REACT_APP_API_URL}/api/gallery/upload`, {
         method: "POST",
         body: formData,
       });
@@ -48,7 +48,7 @@ export default function AdminGallery() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this image?")) return;
     try {
-      await fetch(`http://localhost:5000/api/gallery/${id}`, { method: "DELETE" });
+      await fetch(`${process.env.REACT_APP_API_URL}/api/gallery/${id}`, { method: "DELETE" });
       fetchImages();
     } catch (err) {
       console.error(err);
@@ -85,7 +85,7 @@ export default function AdminGallery() {
                 <Card className="shadow-sm">
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:5000/uploads/gallery/${img.filename}`}
+                    src={`${process.env.REACT_APP_API_URL}/uploads/gallery/${img.filename}`}
                     style={{ height: "200px", objectFit: "cover" }}
                   />
                   <Card.Body className="text-center">

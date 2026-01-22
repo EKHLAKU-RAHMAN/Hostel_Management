@@ -28,7 +28,7 @@ export default function AttendancePage() {
       }
   
       // ✅ ONLY fetch students
-      fetch("http://localhost:5000/api/warden/select/students", {
+      fetch(`${process.env.REACT_APP_API_URL}/api/warden/select/students`, {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())

@@ -34,7 +34,7 @@ const EditStudentForm = () => {
     useEffect(() => {
       const fetchRooms = async () => {
         try {
-          const res = await fetch("http://localhost:5000/api/rooms");
+          const res = await fetch(`${process.env.REACT_APP_API_URL}/api/rooms`);
           const data = await res.json();
   
           // Ensure occupied field exists
@@ -55,7 +55,7 @@ const EditStudentForm = () => {
   useEffect(() => {
     const fetchStudent = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/students/${id}`);
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/students/${id}`);
         const data = await res.json();
 
         setFormData({
@@ -167,7 +167,7 @@ const handleSubmit = async (e) => {
     });
 
     try {
-      const res = await fetch(`http://localhost:5000/api/students/${id}`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/students/${id}`, {
         method: "PUT",
         body: fd,
       });

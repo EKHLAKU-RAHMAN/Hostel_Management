@@ -87,7 +87,7 @@ export default function WardenProfile() {
     setLoading(true);
     const token = localStorage.getItem("wardenToken");
     try {
-      const res = await fetch("http://localhost:5000/api/wardenProfile", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/wardenProfile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -113,7 +113,7 @@ export default function WardenProfile() {
   const handleSave = async () => {
     try {
       const token = localStorage.getItem("wardenToken");
-      const res = await fetch("http://localhost:5000/api/warden/profile", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/warden/profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

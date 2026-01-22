@@ -12,14 +12,16 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import axios from "axios";
+// import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../Api/axios";
 
 export default function AdminLogin() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+   console.log("API URL:", import.meta.env.VITE_API_URL);
 
   // ✅ Handle input change
   const handleChange = (e) => {
@@ -33,7 +35,7 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/admin/login", formData);
+      const res = await api.post("/api/admin/login", formData);
       console.log("Login successful:", res.data);
 
       // ✅ Store token & admin info

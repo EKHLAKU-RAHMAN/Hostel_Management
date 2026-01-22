@@ -32,7 +32,7 @@ const StudentForm = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/rooms");
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/rooms`);
         const data = await res.json();
 
         // Ensure occupied field exists
@@ -164,7 +164,7 @@ const availableRooms = rooms.filter((room) => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/newStudent", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/newStudent`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`, // ✅ Token added

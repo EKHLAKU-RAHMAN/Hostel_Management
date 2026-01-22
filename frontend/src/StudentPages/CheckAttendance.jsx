@@ -21,7 +21,7 @@ export default function CheckAttendance() {
         if (!token) throw new Error("Token missing. Please login.");
 
         const res = await axios.get(
-          "http://localhost:5000/api/attendance/my-attendance",
+          `${process.env.REACT_APP_API_URL}/api/attendance/my-attendance`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

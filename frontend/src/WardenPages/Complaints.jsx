@@ -18,7 +18,7 @@ const ComplaintsManagement = () => {
   // Fetch complaints
   const fetchComplaints = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/admin/complaints", {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/admin/complaints`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setComplaints(res.data.complaints);
@@ -51,7 +51,7 @@ const ComplaintsManagement = () => {
     setUpdating(id);
     try {
       await axios.patch(
-        `http://localhost:5000/api/admin/complaint/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/admin/complaint/${id}`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -76,7 +76,7 @@ const ComplaintsManagement = () => {
     setUpdating(id);
     try {
       await axios.delete(
-        `http://localhost:5000/api/admin/complaint/${id}`,
+        `${process.env.REACT_APP_API_URL}/api/admin/complaint/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setComplaints((prev) => prev.filter((c) => c._id !== id));

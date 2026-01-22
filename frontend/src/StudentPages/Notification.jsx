@@ -12,7 +12,7 @@ export default function StudentMess() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  fetch("http://localhost:5000/api/student/notification")
+  fetch(`${process.env.REACT_APP_API_URL}/api/student/notification`)
     .then((res) => res.json())
     .then((data) => {
       if (Array.isArray(data)) {

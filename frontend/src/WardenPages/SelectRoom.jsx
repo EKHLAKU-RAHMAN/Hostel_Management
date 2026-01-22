@@ -47,7 +47,7 @@ const Rooms = () => {
     const fetchRooms = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/select/rooms",
+          `${process.env.REACT_APP_API_URL}/api/select/rooms`,
           {
             params: { hostel, floor, date },
             headers: {
@@ -75,7 +75,7 @@ const Rooms = () => {
 
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/warden/students-by-room",
+        `${process.env.REACT_APP_API_URL}/api/warden/students-by-room`,
         {
           params: {
             hostel,
@@ -99,7 +99,7 @@ const Rooms = () => {
   const updateStatus = async (studentId, status) => {
   try {
     await axios.post(
-      "http://localhost:5000/api/attendance/mark",
+      `${process.env.REACT_APP_API_URL}/api/attendance/mark`,
       {
         studentId,
         date,
@@ -152,7 +152,7 @@ const Rooms = () => {
 
   try {
     const res = await axios.get(
-      "http://localhost:5000/api/warden/students-by-room",
+      `${process.env.REACT_APP_API_URL}/api/warden/students-by-room`,
       {
         params: {
           hostel,
@@ -176,7 +176,7 @@ const Rooms = () => {
 const updateEditStatus = async (studentId, status) => {
   try {
     await axios.post(
-      "http://localhost:5000/api/attendance/mark",
+      `${process.env.REACT_APP_API_URL}/api/attendance/mark`,
       {
         studentId,
         date,

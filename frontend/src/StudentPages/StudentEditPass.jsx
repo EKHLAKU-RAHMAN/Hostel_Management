@@ -168,7 +168,7 @@ export default function StudentChangePassword() {
       setLoading(true);
       const token = localStorage.getItem("studentToken");
       const res = await axios.put(
-        "http://localhost:5000/api/student/change-password",
+        `${process.env.REACT_APP_API_URL}/api/student/change-password`,
         { oldPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );

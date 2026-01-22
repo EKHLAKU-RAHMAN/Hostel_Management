@@ -16,7 +16,7 @@ export default function StudentGallery() {
 
   const fetchImages = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/gallery");
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/gallery`);
       const data = await res.json();
       setImages(data);
     } catch (err) {
@@ -69,7 +69,7 @@ export default function StudentGallery() {
                 >
                   <Card.Img
                     variant="top"
-                    src={`http://localhost:5000/uploads/gallery/${img.filename}`}
+                    src={`${process.env.REACT_APP_API_URL}/uploads/gallery/${img.filename}`}
                     style={{
                       height: "120px",
                       objectFit: "cover",
@@ -116,7 +116,7 @@ export default function StudentGallery() {
           >
             {images.length > 0 && (
               <img
-                src={`http://localhost:5000/uploads/gallery/${images[photoIndex].filename}`}
+                src={`${process.env.REACT_APP_API_URL}/uploads/gallery/${images[photoIndex].filename}`}
                 alt="gallery"
                 style={{ maxWidth: "100%", maxHeight: "100vh", objectFit: "contain" }}
               />
@@ -131,7 +131,7 @@ export default function StudentGallery() {
               Previous
             </Button>
             <a
-              href={`http://localhost:5000/uploads/gallery/${images[photoIndex].filename}`}
+              href={`${process.env.REACT_APP_API_URL}/uploads/gallery/${images[photoIndex].filename}`}
               download
               className="btn btn-success"
             >

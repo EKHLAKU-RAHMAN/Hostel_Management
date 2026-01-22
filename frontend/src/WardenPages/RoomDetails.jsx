@@ -34,7 +34,7 @@ const RoomManagement = () => {
 
   const fetchRooms = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/rooms");
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/rooms`);
       const data = await res.json();
       setRooms(data);
     } catch (err) {
@@ -46,7 +46,7 @@ const RoomManagement = () => {
     setSelectedRoom(room);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/rooms/${room.roomNo}/students`
+        `${process.env.REACT_APP_API_URL}/api/rooms/${room.roomNo}/students`
       );
       const data = await res.json();
       setStudents(data);

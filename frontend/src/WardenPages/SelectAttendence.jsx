@@ -25,7 +25,7 @@ const SelectAttendanceCriteria = () => {
       try {
         setLoading(true);
         const res = await axios.get(
-          "http://localhost:5000/api/attendance-selection/hostels",
+          `${process.env.REACT_APP_API_URL}/api/attendance-selection/hostels`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("wardenToken")}`
@@ -54,7 +54,7 @@ const SelectAttendanceCriteria = () => {
     const fetchFloors = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/attendance-selection/floors/${formData.hostel}`,
+          `${process.env.REACT_APP_API_URL}/api/attendance-selection/floors/${formData.hostel}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("wardenToken")}`

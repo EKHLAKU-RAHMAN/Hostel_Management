@@ -34,7 +34,7 @@ export default function WardenChangePassword() {
       setLoading(true);
       const token = localStorage.getItem("wardenToken");
       const res = await axios.put(
-        "http://localhost:5000/api/warden/change-password",
+        `${process.env.REACT_APP_API_URL}/api/warden/change-password`,
         { oldPassword, newPassword },
         { headers: { Authorization: `Bearer ${token}` } },
       );

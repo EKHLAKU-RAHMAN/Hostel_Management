@@ -17,7 +17,7 @@ export default function AttendanceReport() {
     setLoading(true);
     const token = localStorage.getItem("wardenToken");
     const params = new URLSearchParams(filters).toString();
-    const res = await fetch(`http://localhost:5000/api/warden/attendance/report?${params}`, {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/warden/attendance/report?${params}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();

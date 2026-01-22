@@ -56,7 +56,7 @@ const RoomManagement = () => {
 
   const fetchRooms = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/rooms");
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/rooms`);
       const data = await res.json();
       setRooms(data);
     } catch (err) {
@@ -69,7 +69,7 @@ const RoomManagement = () => {
     setShowViewModal(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/rooms/${room.roomNo}/students`
+        `${process.env.REACT_APP_API_URL}/api/rooms/${room.roomNo}/students`
       );
       const data = await res.json();
       setStudents(data);
@@ -82,7 +82,7 @@ const RoomManagement = () => {
     e.preventDefault();
     setAdding(true);
     try {
-      const res = await fetch("http://localhost:5000/api/addRoom", {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/addRoom`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newRoom),
@@ -104,7 +104,7 @@ const RoomManagement = () => {
 
   const handleDeleteRoom = async (id) => {
     if (!window.confirm("Delete this room?")) return;
-    await fetch(`http://localhost:5000/api/rooms/${id}`, {
+    await fetch(`${process.env.REACT_APP_API_URL}/api/rooms/${id}`, {
       method: "DELETE",
     });
     fetchRooms();
@@ -120,7 +120,7 @@ const RoomManagement = () => {
     setUpdating(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/rooms/${editRoom._id}`,
+        `${process.env.REACT_APP_API_URL}/api/rooms/${editRoom._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

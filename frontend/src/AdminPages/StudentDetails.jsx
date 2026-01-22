@@ -14,7 +14,7 @@ const StudentDetail = () => {
 
   // Fetch student data from backend
   useEffect(() => {
-    fetch(`http://localhost:5000/students/${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/students/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch student");
         return res.json();     
@@ -34,7 +34,7 @@ const StudentDetail = () => {
   // Delete student handler
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this student?")) {
-      fetch(`http://localhost:5000/students/${id}`, {
+      fetch(`${process.env.REACT_APP_API_URL}/students/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

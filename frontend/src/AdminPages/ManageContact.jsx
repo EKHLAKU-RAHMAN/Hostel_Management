@@ -1,81 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import {
-//   Container,
-//   Typography,
-//   Paper,
-//   Table,
-//   TableBody,
-//   TableCell,
-//   TableContainer,
-//   TableHead,
-//   TableRow,
-//   CircularProgress,
-// } from "@mui/material";
-// import AdminLayout from "../AdminComponent/AdminLayout";
-// import axios from "axios";
-
-// export default function AdminMessages() {
-//   const [messages, setMessages] = useState([]);
-//   const [loading, setLoading] = useState(false);
-
-//   const fetchMessages = async () => {
-//     setLoading(true);
-//     try {
-//       const res = await axios.get("http://localhost:5000/api/contact");
-//       if (res.data.success) setMessages(res.data.data);
-//     } catch (error) {
-//       console.error("Error fetching messages:", error);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchMessages();
-//   }, []);
-
-//   return (
-//     <AdminLayout>
-//       <Container sx={{ mt: 6, mb: 6 }}>
-//         <Typography variant="h4" fontWeight="bold" gutterBottom>
-//           Contact Messages
-//         </Typography>
-
-//         {loading ? (
-//           <CircularProgress />
-//         ) : messages.length === 0 ? (
-//           <Typography>No messages found.</Typography>
-//         ) : (
-//           <TableContainer component={Paper} sx={{ mt: 2 }}>
-//             <Table>
-//               <TableHead>
-//                 <TableRow>
-//                   <TableCell>Name</TableCell>
-//                   <TableCell>Email</TableCell>
-//                   <TableCell>Message</TableCell>
-//                   <TableCell>Date</TableCell>
-//                 </TableRow>
-//               </TableHead>
-//               <TableBody>
-//                 {messages.map((msg) => (
-//                   <TableRow key={msg._id}>
-//                     <TableCell>{msg.name}</TableCell>
-//                     <TableCell>{msg.email}</TableCell>
-//                     <TableCell>{msg.message}</TableCell>
-//                     <TableCell>
-//                       {new Date(msg.createdAt).toLocaleString()}
-//                     </TableCell>
-//                   </TableRow>
-//                 ))}
-//               </TableBody>
-//             </Table>
-//           </TableContainer>
-//         )}
-//       </Container>
-//     </AdminLayout>
-//   );
-// }
-
 
 import React, { useEffect, useState } from "react";
 import {
@@ -112,7 +34,7 @@ export default function AdminMessages() {
   const fetchMessages = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/contact");
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/contact`);
       if (res.data.success) setMessages(res.data.data);
     } catch (error) {
       console.error("Error fetching messages:", error);
@@ -132,7 +54,7 @@ export default function AdminMessages() {
 
   const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/contact/${deleteId}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/contact/${deleteId}`);
       setMessages(messages.filter((msg) => msg._id !== deleteId));
       setConfirmOpen(false);
       setDeleteId(null);

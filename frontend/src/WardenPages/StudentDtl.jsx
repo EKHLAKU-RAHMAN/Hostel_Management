@@ -13,7 +13,7 @@ const StudentDetail = () => {
 
   // Fetch student data from backend
   useEffect(() => {
-    fetch(`http://localhost:5000/students/${id}`)
+    fetch(`${process.env.REACT_APP_API_URL}/students/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch student");
         return res.json();
@@ -70,7 +70,7 @@ const StudentDetail = () => {
                     // src={student.photo || "https://media.istockphoto.com/id/1414942332/photo/studio-shot-of-a-young-man-carrying-a-bag.jpg?s=1024x1024&w=is&k=20&c=3NrhU59yxQ7SlFRYiw-69kr3Y_NC85QAE5psJ0p_QpM="}
                     src={
                       student.photo
-                      ? `http://localhost:5000${student.photo}`
+                      ? `${process.env.REACT_APP_API_URL}${student.photo}`
                       : "https://media.istockphoto.com/id/1414942332/photo/studio-shot-of-a-young-man-carrying-a-bag.jpg?s=1024x1024&w=is&k=20&c=3NrhU59yxQ7SlFRYiw-69kr3Y_NC85QAE5psJ0p_QpM="
                     }
                     roundedCircle

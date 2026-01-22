@@ -28,7 +28,7 @@ export default function AdminWardenPage() {
   const fetchWardens = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:5000/api/wardens");
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/wardens`);
       const data = await res.json();
       console.log("Fetched wardens:", data);
       setWardens(data.wardens || []);
@@ -43,7 +43,7 @@ export default function AdminWardenPage() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this warden?")) return;
     try {
-      await fetch(`http://localhost:5000/api/warden/${id}`, {
+      await fetch(`${process.env.REACT_APP_API_URL}/api/warden/${id}`, {
         method: "DELETE",
       });
       fetchWardens(); // Refresh the list
@@ -56,7 +56,7 @@ export default function AdminWardenPage() {
   const handleEdit = async (warden) => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:5000/api/warden/${warden._id}`);
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/warden/${warden._id}`);
       const data = await res.json();
 
       if (data.success && data.data) {
@@ -78,7 +78,7 @@ export default function AdminWardenPage() {
     try {
       setSaving(true);
       const res = await fetch(
-        `http://localhost:5000/api/warden/${selectedWarden._id}`,
+        `${process.env.REACT_APP_API_URL}/api/warden/${selectedWarden._id}`,
         {
           method: "PUT",
           headers: {

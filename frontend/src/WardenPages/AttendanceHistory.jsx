@@ -24,7 +24,7 @@ export default function AttendanceHistory() {
     setLoading(true);
     const token = localStorage.getItem("wardenToken");
     fetch(
-      `http://localhost:5000/api/warden/attendance/history?date=${date}`,
+      `${process.env.REACT_APP_API_URL}/api/warden/attendance/history?date=${date}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
