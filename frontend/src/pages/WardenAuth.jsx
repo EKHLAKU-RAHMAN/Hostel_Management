@@ -50,7 +50,7 @@ export default function WardenLogin() {
 
     try {
       const res = await api.post(
-        "/api/warden/login",
+        `/api/warden/login`,
         formData
       );
 
