@@ -17,7 +17,7 @@ export default function StudentGallery() {
 
   const fetchImages = async () => {
     try {
-      const res = await fetch(`${API_URL}/api/gallery`);
+      const res = await fetch(`${import.meta.env.VITE_API_RUL}/api/gallery`);
       const data = await res.json();
       setImages(data);
     } catch (err) {
