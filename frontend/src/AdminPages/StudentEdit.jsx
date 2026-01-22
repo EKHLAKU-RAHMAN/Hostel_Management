@@ -175,7 +175,7 @@ const handleSubmit = async (e) => {
 
       const result = await res.json();
 
-      if (res.ok) {
+      if (res.data) {
         Toast.success("✅ Student Updated Successfully!");
         navigate(`/admin/students`);
       } else {
