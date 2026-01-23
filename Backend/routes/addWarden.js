@@ -8,6 +8,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken"); // ✅ Add JWT
 const verifyWarden = require("../middleware/verifyWarden"); // ✅ Middleware to protect routes
 const path = require("path");
+const sendEmail = require("../utils/sendEmail.js");
 
 // Multer setup
 const storage = multer.diskStorage({
@@ -56,6 +57,62 @@ router.post("/newwarden", upload.single("profilePic"), async (req, res) => {
 
     await newWarden.save();
     res.status(201).json({ success: true, message: "Warden added successfully!" });
+
+    await sendEmail({
+  to: email,
+  subject: "Hostel Registration Successful",
+  html: `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+      <h2>Dear ${name},</h2>
+
+      <p>
+        Congratulations! 🎉  
+        We are pleased to inform you that your 
+        <strong>hostel registration has been successfully completed</strong>.
+      </p>
+
+      <hr />
+
+
+      <h3>🔐 Wardnen Login</h3>
+
+      <p>
+        You can access your hostel account using the link below:
+      </p>
+
+      <p style="text-align: center; margin: 20px 0;">
+        <a 
+          href="${process.env.STUDENT_PORTAL_URL}" 
+          style="
+            background: #0d6efd;
+            color: #ffffff;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+          "
+        >
+          Login to Warden Portal
+        </a>
+      </p>
+
+      <p style="font-size: 13px; color: #555;">
+        <a href="${process.env.STUDENT_PORTAL_URL}">
+          ${process.env.STUDENT_PORTAL_URL}
+        </a>
+      </p>
+
+      <hr />
+
+      <p>
+        Regards,<br/>
+        <strong>Shri Ram College Hostel Muzaffarnagar</strong>
+      </p>
+    </div>
+  `
+});
+
   } catch (error) {
     console.error("Error adding warden:", error);
     res.status(500).json({ success: false, message: "Internal server error" });

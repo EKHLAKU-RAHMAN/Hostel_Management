@@ -73,7 +73,7 @@ module.exports.newStudent =  async (req, res) => {
     foundRoom.occupied += 1;
     await foundRoom.save();
 
-  await sendEmail({
+await sendEmail({
   to: email,
   subject: "Hostel Registration Successful",
   html: `
@@ -82,7 +82,8 @@ module.exports.newStudent =  async (req, res) => {
 
       <p>
         Congratulations! 🎉  
-        We are pleased to inform you that your <strong>hostel registration has been successfully completed</strong>.
+        We are pleased to inform you that your 
+        <strong>hostel registration has been successfully completed</strong>.
       </p>
 
       <hr />
@@ -91,26 +92,53 @@ module.exports.newStudent =  async (req, res) => {
 
       <p>
         <strong>Student Name:</strong> ${studentName}<br/>
-        <strong>Student ID:</strong> ${studentId} and your default <b>password:</b> student@123
+        <strong>Student ID:</strong> ${studentId}<br/>
+        <strong>Default Password:</strong> <b>student@123</b><br/>
         <strong>Course:</strong> ${course}<br/>
         <strong>Session:</strong> ${session}
       </p>
 
       <p>
         <strong>Accommodation Details:</strong><br/>
-        ${hostel} – Floor : ${floor} – Room No. <b>${room}</b>
+        ${hostel} – Floor: ${floor} – Room No. <b>${room}</b>
+      </p>
+
+      <hr />
+
+      <h3>🔐 Student Login</h3>
+
+      <p>
+        You can access your hostel account using the link below:
+      </p>
+
+      <p style="text-align: center; margin: 20px 0;">
+        <a 
+          href="${process.env.STUDENT_PORTAL_URL}" 
+          style="
+            background: #0d6efd;
+            color: #ffffff;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+          "
+        >
+          Login to Student Portal
+        </a>
+      </p>
+
+      <p style="font-size: 13px; color: #555;">
+        If the button doesn’t work, copy and paste this link into your browser:<br/>
+        <a href="${process.env.STUDENT_PORTAL_URL}">
+          ${process.env.STUDENT_PORTAL_URL}
+        </a>
       </p>
 
       <hr />
 
       <p>
-        🔐 <strong>Login Information</strong><br/>
-        Your account has been created successfully.  
-        Please use your registered email and the password you set during registration to log in.
-      </p>
-
-      <p>
-        If you face any issues or require corrections in your details, please contact the hostel warden or administration office.
+        If you face any issues or require corrections in your details, please contact the hostel administration.
       </p>
 
       <p>
@@ -120,11 +148,12 @@ module.exports.newStudent =  async (req, res) => {
       <br/>
       <p>
         Regards,<br/>
-        <strong>Hostel Management</strong>
+        <strong>Shri Ram College Hostel Muzaffarnagar</strong>
       </p>
     </div>
   `
 });
+
 
   } catch (err) {
     console.error(err);
@@ -195,6 +224,7 @@ exports.updateStudent = async (req, res) => {
     }
 
     await student.save();
+    res.json({ message: "Student updated successfully", student });
 
     // send email after update successfull
   await sendEmail({
@@ -245,14 +275,12 @@ exports.updateStudent = async (req, res) => {
       <br/>
       <p>
         Regards,<br/>
-        <strong>Hostel Management</strong>
+        <strong>Shri Ram College Hostel Muzaffarnagar</strong>
       </p>
     </div>
   `
 });
 
-
-    res.json({ message: "Student updated successfully", student });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
