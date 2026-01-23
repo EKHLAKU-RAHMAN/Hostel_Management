@@ -179,10 +179,7 @@ const availableRooms = rooms.filter((room) => {
         alert(`⚠️ ${data.message || "Failed to add student"}`);
         return;
       }
-      if (res.ok) {
-        alert("Student added successfully");
-      }
-
+      window.alert("Student added successfully");
       navigate("/admin/students");
     } catch (err) {
       console.error(err);
