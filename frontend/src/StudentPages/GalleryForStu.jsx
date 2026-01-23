@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Card, Row, Col, Spinner, Modal, Button } from "react-bootstrap";
 import StudentLayout from "../StudentComponent/StudentLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function StudentGallery() {
   const [images, setImages] = useState([]);
@@ -16,7 +17,7 @@ export default function StudentGallery() {
 
   const fetchImages = async () => {
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/gallery`);
+      const res = await fetch(`${API_URL}/api/gallery`);
       const data = await res.json();
       setImages(data);
     } catch (err) {
@@ -69,7 +70,7 @@ export default function StudentGallery() {
                 >
                   <Card.Img
                     variant="top"
-                    src={`${process.env.REACT_APP_API_URL}/uploads/gallery/${img.filename}`}
+                    src={`${API_URL}/uploads/gallery/${img.filename}`}
                     style={{
                       height: "120px",
                       objectFit: "cover",
@@ -116,7 +117,7 @@ export default function StudentGallery() {
           >
             {images.length > 0 && (
               <img
-                src={`${process.env.REACT_APP_API_URL}/uploads/gallery/${images[photoIndex].filename}`}
+                src={`${API_URL}/uploads/gallery/${images[photoIndex].filename}`}
                 alt="gallery"
                 style={{ maxWidth: "100%", maxHeight: "100vh", objectFit: "contain" }}
               />
@@ -131,7 +132,7 @@ export default function StudentGallery() {
               Previous
             </Button>
             <a
-              href={`${process.env.REACT_APP_API_URL}/uploads/gallery/${images[photoIndex].filename}`}
+              href={`${API_URL}/uploads/gallery/${images[photoIndex].filename}`}
               download
               className="btn btn-success"
             >

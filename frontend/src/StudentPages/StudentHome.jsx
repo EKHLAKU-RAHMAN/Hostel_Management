@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 import StudentLayout from "../StudentComponent/StudentLayout";
 import { Link } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import NotificationsIcon from "@mui/icons-material/NotificationsActive";
 
 export default function StudentHome() {

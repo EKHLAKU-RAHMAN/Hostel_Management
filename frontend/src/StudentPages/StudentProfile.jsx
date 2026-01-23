@@ -4,8 +4,9 @@ import { Container, Card, Row, Col, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import StudentLayout from "../StudentComponent/StudentLayout";
-import axios from "axios";
+// import axios from "axios";
 import { Button } from "react-bootstrap";
+import api from "../Api/axios";
 
 
 const StudentProfile = () => {
@@ -19,7 +20,7 @@ const StudentProfile = () => {
         const token = localStorage.getItem("studentToken");
         if (!token) throw new Error("Token missing. Please login.");
 
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/studentProfile`, {
+        const res = await api.get(`/api/studentProfile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

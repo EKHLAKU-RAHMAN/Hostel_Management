@@ -4,6 +4,9 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import StudentLayout from "../StudentComponent/StudentLayout";
 
+// const API_URL = process.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function StudentComplaintPage() {
   const storedStudent = JSON.parse(localStorage.getItem("student")) || {};
   const token = localStorage.getItem("studentToken");
@@ -51,7 +54,7 @@ export default function StudentComplaintPage() {
     setMessage("");
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/student/complaint`, {
+      const res = await fetch(`${API_URL}/api/student/complaint`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +88,7 @@ export default function StudentComplaintPage() {
   const fetchComplaints = async () => {
     setLoadingComplaints(true);
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/student/my-complaints`, {
+      const res = await fetch(`${API_URL}/api/student/my-complaints`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -103,7 +106,7 @@ export default function StudentComplaintPage() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this complaint?")) return;
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/student/delete/${id}`, {
+      const res = await fetch(`${API_URL}/api/student/delete/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

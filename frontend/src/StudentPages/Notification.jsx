@@ -6,13 +6,14 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import { motion } from "framer-motion";
 import StudentLayout from "../StudentComponent/StudentLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function StudentMess() {
   const [pdfs, setPDFs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  fetch(`${process.env.REACT_APP_API_URL}/api/student/notification`)
+  fetch(`${API_URL}/api/student/notification`)
     .then((res) => res.json())
     .then((data) => {
       if (Array.isArray(data)) {

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import StudentLayout from "../StudentComponent/StudentLayout";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import api  from "../Api/axios";
 
 export default function CheckAttendance() {
   const navigate = useNavigate();
@@ -20,8 +21,8 @@ export default function CheckAttendance() {
         const token = localStorage.getItem("studentToken");
         if (!token) throw new Error("Token missing. Please login.");
 
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/attendance/my-attendance`,
+        const res = await api.get(
+          `${API_URL}/api/attendance/my-attendance`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
