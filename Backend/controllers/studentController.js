@@ -67,6 +67,7 @@ module.exports.newStudent =  async (req, res) => {
     });
 
     await newStudent.save();
+    res.status(201).json({ message: "Student registered successfully", student: newStudent });
 
     // increment occupied count in room
     foundRoom.occupied += 1;
@@ -125,8 +126,6 @@ module.exports.newStudent =  async (req, res) => {
   `
 });
 
-
-    res.status(201).json({ message: "Student registered successfully", student: newStudent });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: err.message });
