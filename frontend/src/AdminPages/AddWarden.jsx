@@ -17,6 +17,7 @@ import axios from "axios";
 import AdminLayout from "../AdminComponent/AdminLayout";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 // import axios from "../Api/axios";
+import api from "../Api/axios";
 
 export default function AddWarden() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ export default function AddWarden() {
 
     try {
       setLoading(true);
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/newwarden`, warden);
+      const res = await api.post(`/api/newwarden`, warden);
 
       if (res.data.success) {
         alert("✅ " + res.data.message);
