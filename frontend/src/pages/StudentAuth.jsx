@@ -45,6 +45,8 @@ export default function StudentLogin() {
     try {
       const res = await api.post(`/api/student/login`, formData);
 
+        localStorage.setItem("studentToken", res.data.token);
+        localStorage.setItem("studentData", JSON.stringify(res.data.student));
       // ✅ Save token/data in localStorage (persistent) or sessionStorage (temporary)
       if (remember) {
         localStorage.setItem("studentToken", res.data.token || "demo-token");
