@@ -176,7 +176,7 @@ const handleSubmit = async (e) => {
       const result = await res.json();
 
       if (res.data) {
-        Toast.success("✅ Student Updated Successfully!");
+        alert("✅ Student Updated Successfully!");
         navigate(`/admin/students`);
       } else {
         // 👇 Backend se aaya hua error message flash karo
