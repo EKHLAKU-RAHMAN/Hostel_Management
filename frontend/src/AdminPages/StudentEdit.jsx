@@ -175,11 +175,10 @@ const handleSubmit = async (e) => {
 
       const result = await res.json();
 
-      if (res.data) {
-        alert("✅ Student Updated Successfully!");
+      if (res.ok) {
+        alert(`✅ Student Updated Successfully!`);
         navigate(`/admin/students`);
       } else {
-        // 👇 Backend se aaya hua error message flash karo
         alert(`❌ Update Failed: ${result.message}`);
       }
     } catch (err) {
