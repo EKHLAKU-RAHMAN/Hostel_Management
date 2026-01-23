@@ -175,12 +175,12 @@ const availableRooms = rooms.filter((room) => {
 
       const data = await res.json();
 
-      if (!res.ok) {
+      if (res.ok) {
+       alert(`Student added successfully`);
+        navigate("/admin/students");
+      }else{
         alert(`⚠️ ${data.message || "Failed to add student"}`);
         return;
-      }else{
-      alert("Student added successfully");
-        navigate("/admin/students");
       }
      
     } catch (err) {
