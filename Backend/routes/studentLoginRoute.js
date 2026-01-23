@@ -25,6 +25,11 @@ router.post("/student/login", async (req, res) => {
     //   return res.status(400).json({ message: "Invalid credentials" });
     // }
 
+        // 🔍 DEBUG LOGS (YAHAN PASTE KARO)
+    console.log("INPUT PASSWORD:", password);
+    console.log("DB PASSWORD:", student.password);
+    console.log("IS HASHED:", student.password.startsWith("$2"));
+
     let isMatch = false;
 
 if (student.password.startsWith("$2")) {
