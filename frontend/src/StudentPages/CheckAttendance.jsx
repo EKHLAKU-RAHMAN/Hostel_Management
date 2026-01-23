@@ -22,7 +22,7 @@ export default function CheckAttendance() {
         if (!token) throw new Error("Token missing. Please login.");
 
         const res = await api.get(
-          `${API_URL}/api/attendance/my-attendance`,
+          `/api/attendance/my-attendance`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
