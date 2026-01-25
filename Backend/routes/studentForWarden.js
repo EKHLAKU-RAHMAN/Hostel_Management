@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/warden/students", auth, async (req, res) => {
   try {
     // if (req.user.role.toLowerCase() !== "warden")
-     if (!req.user || req.user.role !== "warden"){
+     if (!req.warden){
        return res.status(403).json({ msg: "Access denied" });
      }
 
