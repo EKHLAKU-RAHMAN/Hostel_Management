@@ -10,7 +10,7 @@ router.get("/warden/students", auth, async (req, res) => {
     if (req.user.role.toLowerCase() !== "warden")
       return res.status(403).json({ msg: "Access denied" });
 
-    const students = await Student.find({ year: req.user.yearAssigned });
+    const students = await Student.find({});
     res.json(students);
   } catch (err) {
     res.status(500).json({ msg: err.message });
