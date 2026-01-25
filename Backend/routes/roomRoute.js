@@ -35,7 +35,7 @@ router.post("/api/addRoom", async (req, res) => {
     const { roomNo, capacity, status, hostel, floor } = req.body;
 
     // room already exist check
-    const existingRoom = await Room.findOne({ roomNo });
+    const existingRoom = await Room.findOne({ roomNo, hostel });
     if (existingRoom) {
       return res.status(409).json({ message: "Room already exists" });
     }
