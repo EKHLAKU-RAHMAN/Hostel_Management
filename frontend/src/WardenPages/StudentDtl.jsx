@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, Button, Row, Col, ListGroup, Image, Spinner } from "react-bootstrap";
 import WardenLayout from "../WardenComponent/WardenLayout";
+const API_URL = import.meta.env.VITE_API_URL;
 
 const StudentDetail = () => {
   const { id } = useParams(); // Dynamic student id from URL
@@ -13,7 +14,7 @@ const StudentDetail = () => {
 
   // Fetch student data from backend
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/students/${id}`)
+    fetch(`${API_URL}/students/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch student");
         return res.json();
@@ -40,7 +41,7 @@ const StudentDetail = () => {
       ) : error ? (
         <div className="text-center mt-5 text-danger">
           <h4>{error}</h4>
-          <Button variant="secondary" onClick={() => navigate("/admin/students")}>
+          <Button variant="secondary" onClick={() => navigate("/warden/students")}>
             Back to Students
           </Button>
         </div>
