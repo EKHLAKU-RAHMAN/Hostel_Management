@@ -81,7 +81,7 @@ module.exports.newStudent =  async (req, res) => {
     foundRoom.occupied += 1;
     await foundRoom.save();
 
- await sendEmail({
+ sendEmail({
   to: email,
   subject: "Hostel Registration Successful",
   html: `
@@ -103,7 +103,6 @@ module.exports.newStudent =  async (req, res) => {
         <strong>Student ID:</strong> ${studentId}<br/>
         <strong>Default Password:</strong> <b>student@123</b><br/>
         <strong>Course:</strong> ${course}<br/>
-        <strong>Session:</strong> ${session}
       </p>
 
       <p>
@@ -148,11 +147,6 @@ module.exports.newStudent =  async (req, res) => {
       <p>
         If you face any issues or require corrections in your details, please contact the hostel administration.
       </p>
-
-      <p>
-        We wish you a comfortable and successful stay.
-      </p>
-
       <br/>
       <p>
         Regards,<br/>
