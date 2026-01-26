@@ -78,7 +78,7 @@ module.exports.newStudent =  async (req, res) => {
     foundRoom.occupied += 1;
     await foundRoom.save();
 
- sendEmail({
+ await sendEmail({
   to: email,
   subject: "Hostel Registration Successful",
   html: `
@@ -87,8 +87,7 @@ module.exports.newStudent =  async (req, res) => {
 
       <p>
         Congratulations! 🎉  
-        We are pleased to inform you that your 
-        <strong>hostel registration has been successfully completed</strong>.
+        <strong>your hostel registration has been successfully completed</strong>.
       </p>
 
       <hr />
@@ -105,38 +104,6 @@ module.exports.newStudent =  async (req, res) => {
       <p>
         <strong>Accommodation Details:</strong><br/>
         ${hostel} – Floor: ${floor} – Room No. <b>${room}</b>
-      </p>
-
-      <hr />
-
-      <h3>🔐 Student Login</h3>
-
-      <p>
-        You can access your hostel account using the link below:
-      </p>
-
-      <p style="text-align: center; margin: 20px 0;">
-        <a 
-          href="${process.env.STUDENT_PORTAL_URL}" 
-          style="
-            background: #0d6efd;
-            color: #ffffff;
-            padding: 12px 20px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            display: inline-block;
-          "
-        >
-          Login to Student Portal
-        </a>
-      </p>
-
-      <p style="font-size: 13px; color: #555;">
-        If the button doesn’t work, copy and paste this link into your browser:<br/>
-        <a href="${process.env.STUDENT_PORTAL_URL}">
-          ${process.env.STUDENT_PORTAL_URL}
-        </a>
       </p>
 
       <hr />
