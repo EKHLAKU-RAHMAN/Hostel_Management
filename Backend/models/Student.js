@@ -8,7 +8,7 @@ const studentSchema = new mongoose.Schema({
   motherName: { type: String },
   studentMobile: { type: String, match: /^[0-9]{10}$/ },
   fatherMobile: { type: String, match: /^[0-9]{10}$/ },
-  email: { type: String, sparse: true }, // ✅ sparse: true to avoid duplicate null errors
+  email: { type: String }, 
   studentId: { type: String, unique: true, required: true },
   course: { type: String },
   session: { type: String },
