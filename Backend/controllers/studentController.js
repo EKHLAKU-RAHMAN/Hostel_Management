@@ -40,7 +40,13 @@ module.exports.newStudent =  async (req, res) => {
     if (!foundRoom) {
       return res.status(400).json({ message: "Room not found" });
     }
-    if (foundRoom.occupied >= foundRoom.capacity) {
+    // 2️⃣ Count REAL students in room
+      const occupiedCount = await Student.countDocuments({
+        room: foundRoom._id,
+        isActive: true
+      });
+      
+    if (occupiedCount >= foundRoom.capacity) {
       return res.status(400).json({ message: "Room is already full" });
     }
 
