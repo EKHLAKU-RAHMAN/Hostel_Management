@@ -45,7 +45,7 @@ module.exports.newStudent =  async (req, res) => {
         room: foundRoom._id,
         isActive: true
       });
-      
+
     if (occupiedCount >= foundRoom.capacity) {
       return res.status(400).json({ message: "Room is already full" });
     }
@@ -205,7 +205,7 @@ exports.updateStudent = async (req, res) => {
       floor,
     } = req.body;
 
-    // Purana student fetch karo
+    // Old student fetch
     const student = await Student.findById(studentId);
     if (!student) return res.status(404).json({ message: "Student not found" });
 
@@ -216,12 +216,22 @@ exports.updateStudent = async (req, res) => {
         return res.status(404).json({ message: "Room not found" });
       }
 
-      // Room capacity check with actual students count
-      const studentCount = await Student.countDocuments({ room });
-      if (studentCount >= foundRoom.capacity) {
-        return res.status(400).json({ message: "Room is already full" });
-      }
+    //   // Room capacity check with actual students count
+    //   const studentCount = await Student.countDocuments({ room });
+    //   if (studentCount >= foundRoom.capacity) {
+    //     return res.status(400).json({ message: "Room is already full" });
+    //   }
+
+        // 2️⃣ Count REAL students in room
+        const occupiedCount = await Student.countDocuments({
+        room: foundRoom._id,
+        isActive: true
+      });
+
+    if (occupiedCount >= foundRoom.capacity) {
+      return res.status(400).json({ message: "Room is already full" });
     }
+  }
 
     // Update data
     Object.assign(student, req.body);
