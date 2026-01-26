@@ -26,7 +26,7 @@ const resend = new Resend(process.env.RE-EMAIL_API_KEY);
 
 module.exports = async function sendEmail({ to, subject, html }) {
   return resend.emails.send({
-    from: `Hostel ERP <${process.env.FROM_EMAIL}>`,
+    from: `Hostel ERP <${process.env.EMAIL_USER}>`,
     to,
     subject,
     html,
