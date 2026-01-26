@@ -81,7 +81,7 @@ module.exports.newStudent =  async (req, res) => {
     foundRoom.occupied += 1;
     await foundRoom.save();
 
-sendEmail({
+ await sendEmail({
   to: email,
   subject: "Hostel Registration Successful",
   html: `
