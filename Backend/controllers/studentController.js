@@ -73,7 +73,9 @@ module.exports.newStudent =  async (req, res) => {
     });
 
     await newStudent.save();
-    res.status(201).json({ message: "Student registered successfully", student: newStudent });
+    res.status(201).json({
+      message: "Student registered successfully",
+      student: newStudent });
 
     // increment occupied count in room
     foundRoom.occupied += 1;
@@ -158,8 +160,13 @@ sendEmail({
       </p>
     </div>
   `
-});
-
+})
+ .then(() => {
+        console.log("📧 Email sent to:", email);
+      })
+      .catch((err) => {
+        console.error("❌ Email failed:", err.message);
+      });
 
   } catch (err) {
     console.error(err);
@@ -240,7 +247,7 @@ exports.updateStudent = async (req, res) => {
     }
 
     await student.save();
-    res.json({ message: "Student updated successfully", student });
+    res.status(201).json({ message: "Student updated successfully", student });
 
     // send email after update successfull
   sendEmail({
