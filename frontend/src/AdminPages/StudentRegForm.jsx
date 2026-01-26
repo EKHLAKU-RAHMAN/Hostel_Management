@@ -50,14 +50,6 @@ const StudentForm = () => {
     fetchRooms();
   }, []);
 
-  //for room suggestion
-//   const availableRooms = rooms.filter(
-//   (room) =>
-//     room.occupied < room.capacity &&
-//     room.hostel === formData.hostel &&
-//     room.floor === formData.floor
-// );
-
 const availableRooms = rooms.filter((room) => {
   if (room.occupied >= room.capacity) return false;
 
@@ -66,7 +58,6 @@ const availableRooms = rooms.filter((room) => {
 
   return true;
 });
-
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
