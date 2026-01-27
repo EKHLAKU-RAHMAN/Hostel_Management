@@ -29,11 +29,12 @@
 // const { Resend } = require("resend");
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RE-EMAIL_API_KEY);
+const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
 
 module.exports = async function sendEmail({ to, subject, html }) {
   return resend.emails.send({
-    from: `Hostel ERP <${process.env.EMAIL_USER}>`,
+    // from: `Hostel ERP <${process.env.EMAIL_USER}>`,
+    from: "Hostel ERP <onboarding@resend.dev>",
     to,
     subject,
     html,
