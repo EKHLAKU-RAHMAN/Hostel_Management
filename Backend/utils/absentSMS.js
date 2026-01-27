@@ -37,12 +37,12 @@ const axios = require("axios");
 const sendSMS = async ({ mobile, message }) => {
   try {
     const response = await axios.post(
-      "https://www.fast2sms.com/dev/bulkV2", // ✅ NEW API
+      "https://www.fast2sms.com/dev/bulkV2", 
       {
-        route: "q",                      // ✅ ONLY q WORKS now
+        route: "q",                    
         message: message,
         numbers: mobile.toString() ,
-        flash: 0,      // ✅ REQUIRED
+        flash: 0, 
       },
       {
         headers: {
