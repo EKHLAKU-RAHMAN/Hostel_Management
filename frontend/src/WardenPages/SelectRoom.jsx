@@ -89,6 +89,8 @@ const Rooms = () => {
         }
       );
       setStudents(res.data);
+      await fetchRooms();
+
     } catch (err) {
       console.error(err);
     } finally {
