@@ -26,8 +26,8 @@
 // module.exports = sendEmail;
 
 
-// const { Resend } = require("resend");
-import { Resend } from "resend";
+const { Resend } = require("resend");
+
 
 const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
 
