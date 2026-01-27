@@ -41,42 +41,25 @@
 //   });
 // };
 
+import { Resend } from "resend";
 
-const nodemailer = require("nodemailer");
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-const sendEmail = async ({ to, subject, html }) => {
+export const sendEmail = async ({ to, subject, html }) => {
   try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      // host: "smtp-relay.brevo.com",
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.EMAIL_USER2,
-        pass: process.env.EMAIL_PASS2,
-      },
-      connectionTimeout: 20000,
-    });
-
-    // 🔍 SMTP test
-    await transporter.verify();
-    console.log("✅ SMTP connected");
-
-    await transporter.sendMail({
-      from: `"Hostel Management" <${process.env.EMAIL_USER2}>`,
+    await resend.emails.send({
+      from: "Hostel ERP <onboarding@resend.dev>",
       to,
       subject,
       html,
     });
 
-    console.log("✅ Email sent");
-    return true;
-  } catch (err) {
-    console.error("❌ Email failed:", err.message);
-    return false;
+    console.log("✅ Email sent successfully");
+  } catch (error) {
+    console.error("❌ Email failed:", error);
   }
 };
 
-module.exports = sendEmail;
+
 
 
