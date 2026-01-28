@@ -4,10 +4,10 @@ const upload = require("../routes/Upload");
 const express = require("express");
 const Room = require("../models/Room.js");
 const bcrypt = require("bcryptjs");
-const sendEmail = require("../utils/sendEmail.js");
+// const sendEmail = require("../utils/sendEmail.js");
+const sendSMS = require("../utils/sendSMS.js");
 
 const router = express.Router();
-
 
 
 // Add new student
@@ -81,53 +81,80 @@ module.exports.newStudent =  async (req, res) => {
     foundRoom.occupied += 1;
     await foundRoom.save();
 
- await sendEmail({
-  to: email,
-  subject: "Hostel Registration Successful",
-  html: `
-    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-      <h2>Dear ${studentName},</h2>
+//  await sendEmail({
+//   to: email,
+//   subject: "Hostel Registration Successful",
+//   html: `
+//     <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+//       <h2>Dear ${studentName},</h2>
 
-      <p>
-        Congratulations! 🎉  
-        <strong>your hostel registration has been successfully completed</strong>.
-      </p>
+//       <p>
+//         Congratulations! 🎉  
+//         <strong>your hostel registration has been successfully completed</strong>.
+//       </p>
 
-      <hr />
+//       <hr />
 
-      <h3>🏠 Hostel & Admission Details</h3>
+//       <h3>🏠 Hostel & Admission Details</h3>
 
-      <p>
-        <strong>Student Name:</strong> ${studentName}<br/>
-        <strong>Student ID:</strong> ${studentId}<br/>
-        <strong>Default Password:</strong> <b>student@123</b><br/>
-        <strong>Course:</strong> ${course}<br/>
-      </p>
+//       <p>
+//         <strong>Student Name:</strong> ${studentName}<br/>
+//         <strong>Student ID:</strong> ${studentId}<br/>
+//         <strong>Default Password:</strong> <b>student@123</b><br/>
+//         <strong>Course:</strong> ${course}<br/>
+//       </p>
 
-      <p>
-        <strong>Accommodation Details:</strong><br/>
-        ${hostel} – Floor: ${floor} – Room No. <b>${room}</b>
-      </p>
+//       <p>
+//         <strong>Accommodation Details:</strong><br/>
+//         ${hostel} – Floor: ${floor} – Room No. <b>${room}</b>
+//       </p>
 
-      <hr />
+//       <hr />
 
-      <p>
-        If you face any issues or require corrections in your details, please contact the hostel administration.
-      </p>
-      <br/>
-      <p>
-        Regards,<br/>
-        <strong>Shri Ram College Hostel Muzaffarnagar</strong>
-      </p>
-    </div>
-  `
+//       <p>
+//         If you face any issues or require corrections in your details, please contact the hostel administration.
+//       </p>
+//       <br/>
+//       <p>
+//         Regards,<br/>
+//         <strong>Shri Ram College Hostel Muzaffarnagar</strong>
+//       </p>
+//     </div>
+//   `
+// })
+//  .then(() => {
+//         console.log("📧 Email sent to:", email);
+//       })
+//       .catch((err) => {
+//         console.error("❌ Email failed:", err.message);
+//       });
+
+
+// 📱 SEND SMS TO STUDENT
+const smsMessage = 
+`Dear ${studentName},
+Your hostel registration is successful ✅
+
+Hostel: ${hostel}
+Room No: ${room}
+Student ID: ${studentId}
+Course: ${course}
+
+A default password is set. Please change it after first login.
+
+– Shri Ram College Hostel Muzaffarnagar`;
+
+sendSMS({
+  mobile: studentMobile,
+  message: smsMessage
 })
- .then(() => {
-        console.log("📧 Email sent to:", email);
-      })
-      .catch((err) => {
-        console.error("❌ Email failed:", err.message);
-      });
+  .then(() => {
+    console.log("📱 SMS sent to:", studentMobile);
+  })
+  .catch((err) => {
+    console.error("❌ SMS failed:", err.message);
+  });
+
 
   } catch (err) {
     console.error(err);
