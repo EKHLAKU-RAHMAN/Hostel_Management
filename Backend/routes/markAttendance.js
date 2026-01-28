@@ -107,10 +107,9 @@ router.post("/attendance/mark", verifyWarden, async (req, res) => {
     ) {
       console.log("🚨 ABSENT SMS SENT");
 
-      const smsText = `Dear Parent,
-This is to inform you that your ward ${student.studentName} (Room ${student.room}, ${student.hostel}) was absent from the hostel on ${date}.
+const smsText = `Dear Parent, aapko suchit kiya jata hai ki aapke child ${student.studentName}, Room No. ${student.room} (${student.hostel}), ${date} ko bina suchna ke hostel se anupasthit paye gaye.  
+– Shri Ram College Hostel, Muzaffarnagar`;
 
-– Shri Ram College Hostel Muzaffarnagar`;
 
       await sendSMS({
         mobile: student.fatherMobile,

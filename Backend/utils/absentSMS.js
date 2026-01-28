@@ -1,36 +1,4 @@
 
-// const axios = require("axios");
-
-// const sendSMS = async ({message, mobile}) => {
-//   console.log("📤 sendSMS FUNCTION CALLED");
-//   console.log("📨 Message:", message);
-//   console.log("🔑 API KEY:", process.env.SMS_API_KEY ? "FOUND" : "NOT FOUND");
-
-//   try {
-//     const response = await axios({
-//       method: "POST",
-//       url:  "https://www.fast2sms.com/v1/bulk",
-//       headers: {
-//         authorization: process.env.SMS_API_KEY,
-//         "Content-Type": "application/json"
-//       },
-//       data: {
-//         route: "q",
-//         // sender_id: "TXTIND", 
-//         message: message,
-//         language: "english",
-//         mobile: mobile.toString(),
-//       }
-//     });
-
-//     console.log("✅ SMS SENT RESPONSE:", response.data);
-//   } catch (error) {
-//     console.error("❌ SMS ERROR:", error.response?.data || error.message);
-//   }
-// };
-
-// module.exports = sendSMS;
-
 
 const axios = require("axios");
 
