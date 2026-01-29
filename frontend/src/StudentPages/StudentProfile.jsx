@@ -62,7 +62,7 @@ const StudentProfile = () => {
       <Button
           variant="secondary"
           className="mb-2"
-          onClick={() => navigate("/student/home")}
+          onClick={() => navigate("/student/dashboard")}
         >
           ← Back
         </Button>
