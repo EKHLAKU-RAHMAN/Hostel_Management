@@ -10,12 +10,12 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "hostel.png",
+      "src": "/images/src hostel.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "hostel.png",
+      "src": "/images/src hostel.png",
       "sizes": "512x512",
       "type": "image/png"
     }
