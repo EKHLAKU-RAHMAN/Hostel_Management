@@ -53,8 +53,8 @@ export default function StudentLogin() {
         sessionStorage.setItem("studentData", JSON.stringify(res.data.student));
 
       if (remember) {
-        localStorage.setItem("studentToken", res.data.token);
-        localStorage.setItem("studentData", JSON.stringify(res.data.student));
+        // localStorage.setItem("studentToken", res.data.token);
+        // localStorage.setItem("studentData", JSON.stringify(res.data.student));
         localStorage.setItem(
           "studentRememberMe",
           JSON.stringify(formData)
