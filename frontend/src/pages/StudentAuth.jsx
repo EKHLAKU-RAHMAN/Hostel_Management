@@ -42,34 +42,68 @@ export default function StudentLogin() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setError("");
+  //   setLoading(true);
+
+  //   try {
+  //     const res = await api.post("/api/student/login", formData);
+  //       sessionStorage.setItem("studentToken", res.data.token);
+  //       sessionStorage.setItem("studentData", JSON.stringify(res.data.student));
+
+  //     if (remember) {
+  //       // localStorage.setItem("studentToken", res.data.token);
+  //       // localStorage.setItem("studentData", JSON.stringify(res.data.student));
+  //       localStorage.setItem(
+  //         "studentRememberMe",
+  //         JSON.stringify(formData)
+  //       );
+  //     } else {
+  //       localStorage.removeItem("studentRememberMe");
+  //     }
+
+  //     navigate("/student/dashboard");
+  //   } catch (err) {
+  //     setError(err.response?.data?.message || "Invalid credentials");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
+  e.preventDefault();
+  setError("");
+  setLoading(true);
 
-    try {
-      const res = await api.post("/api/student/login", formData);
-        sessionStorage.setItem("studentToken", res.data.token);
-        sessionStorage.setItem("studentData", JSON.stringify(res.data.student));
+  try {
+    const res = await api.post("/api/student/login", formData);
 
-      if (remember) {
-        // localStorage.setItem("studentToken", res.data.token);
-        // localStorage.setItem("studentData", JSON.stringify(res.data.student));
-        localStorage.setItem(
-          "studentRememberMe",
-          JSON.stringify(formData)
-        );
-      } else {
-        localStorage.removeItem("studentRememberMe");
-      }
+    // ✅ TOKEN ALWAYS LOCAL (important)
+    localStorage.setItem("studentToken", res.data.token);
+    localStorage.setItem(
+      "studentData",
+      JSON.stringify(res.data.student)
+    );
 
-      navigate("/student/dashboard");
-    } catch (err) {
-      setError(err.response?.data?.message || "Invalid credentials");
-    } finally {
-      setLoading(false);
+    // ✅ Remember Me only for form fill
+    if (remember) {
+      localStorage.setItem(
+        "studentRememberMe",
+        JSON.stringify(formData)
+      );
+    } else {
+      localStorage.removeItem("studentRememberMe");
     }
-  };
+
+    navigate("/student/dashboard");
+  } catch (err) {
+    setError(err.response?.data?.message || "Invalid credentials");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <Box
