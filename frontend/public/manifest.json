@@ -3,10 +3,11 @@
   "name": "Hostel ERP",
   "short_name": "ERP",
   "description": "Hostel management system: attendance, rooms, notifications, and more.",
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#1976d2",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "logo192.png",
