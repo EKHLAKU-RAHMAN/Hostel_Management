@@ -1,7 +1,7 @@
 
 {
   "name": "Hostel ERP",
-  "short_name": "ERP",
+  "short_name": "SRCH",
   "description": "Hostel management system: attendance, rooms, notifications, and more.",
   "start_url": "/",
   "display": "standalone",

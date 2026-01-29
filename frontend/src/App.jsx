@@ -202,7 +202,7 @@ function App() {
           <Route path="/login/admin" element={<AdminAuth />} />
 
           {/* Student Routes */}
-          <Route path="/student/home" element={<StudentHome />} />
+          <Route path="/student/dashboard" element={<StudentHome />} />
           <Route path="/student/attendance" element={<CheckAttendance />} />
           <Route path="/student/profile" element={<StudentProfile />} />
           <Route path="/student/complaints" element={<Complaints />} />
