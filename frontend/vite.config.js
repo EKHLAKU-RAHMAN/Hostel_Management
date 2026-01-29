@@ -1,35 +1,30 @@
+// import { defineConfig } from 'vite'
+// import react from '@vitejs/plugin-react'
+
+// // https://vite.dev/config/
+// export default defineConfig({
+//   plugins: [react()],
+// })
 
 
-import { VitePWA } from 'vite-plugin-pwa';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-export default {
-  plugins: [
-    react(),
-    VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'robots.txt', 'apple-touch-icon.png'],
-      manifest: {
-        name: 'Hostel ERP',
-        short_name: 'ERP',
-        description: 'Hostel management system: attendance, rooms, notifications, and more.',
-        theme_color: '#1976d2',
-        background_color: '#ffffff',
-        display: 'standalone',
-        start_url: '/',
-        icons: [
-          {
-            src: 'logo192.png',
-            sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'logo512.png',
-            sizes: '512x512',
-            type: 'image/png'
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            return "vendor"; // sab external libraries alag chunk me
           }
-        ]
-      }
-    })
-  ]
-};
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000, // 1 MB limit, warning ignore
+  },
+});
+
+
 
